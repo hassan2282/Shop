@@ -6,17 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\productRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Repository\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
+    private ProductRepositoryInterface $productRepository;
+    public function __construct(ProductRepositoryInterface $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::all();
+        $products = $this->productRepository->getProductsByFilters();
         return view('admin.products.index', compact('products'));
     }
 

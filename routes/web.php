@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 /* GOOGLE LOGIN END */
 
 /* Ramz */
-//Route::get('/ramz',function(){return view('admin')});
+Route::get('/ramz',function(){return view('admin');});
 /* Ramz End */
 
 Route::middleware([
@@ -57,4 +57,6 @@ Route::middleware([
     Route::get('/google/callback', [GoogleController::class, 'callback']);
     // admin panel logout
     Route::post('/admin/logout',function(){auth()->logout(); return redirect('/');})->name('admin.logout');
+
+
 @include('adminRoutes.php');
